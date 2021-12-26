@@ -1,0 +1,14 @@
+12/12/2021  --> Docker/Docker-Compose
+
+1) Centos7 VM
+2) sudo yum install -y yum-utils
+3) sudo yum-config-manager     --add-repo     https://download.docker.com/linux/centos/docker-ce.repo
+4) sudo yum install -y docker-ce
+5) sudo systemctl start docker
+6) sudo systemctl enable docker
+7) sudo usermod -aG docker centos
+8) sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+9) sudo chmod +x /usr/local/bin/docker-compose
+10) docker info
+11) docker info | grep -i root
+12) du -sh /var/lib/docker
