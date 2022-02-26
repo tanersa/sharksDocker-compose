@@ -230,7 +230,10 @@ Let's find a solution using **Docker-Compose**...
    Whenever images are pulled and container is created it takes some memory from the disk space. Then all those are written to above directory. 
    
    -  To see how big is the memory under docker directory:
-      sudo du -sh /var/lib/docker
+  
+            sudo du -sh /var/lib/docker
+            
+            
       
       
             
