@@ -162,6 +162,7 @@ We have Tomcat application and we are **Dockerizing** it or **Containerizing** i
 We'll use **docker compose** in order to **orchestrate** docker containers in lower environments. 
 
 Use yaml file to configure your applications' services. You would be able to create and start all services with a single command from your configuration file.
+In comparison with other container orchestration tool **K8s**, **docker compose** is less complicated. Containers can be destroyed with just command.
       
 Let's find a solution using **Docker-Compose**...
 
@@ -205,7 +206,9 @@ Let's find a solution using **Docker-Compose**...
             ssh to your instance ( ssh -i ~/Downloads/demo.pem centos@{public-ip-of-instance} )
             doccker ps
             
-            
+   -  Install docker compose for centos7 linux family
+   
+            sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
   
           
           
