@@ -1,16 +1,32 @@
-# Docker - DockerCompose
+# Docker - Docker Compose
 
 
 ![alt text](https://github.com/tanersa/sharksJenkins/blob/master/Docker.png)
 
 <br />
 
+ **DOCKER**
+ 
  **Docker** is a container runtime that is **not SERVERLESS**. Therefore, Docker requires to be managed by developers during building and running applications. 
  In reality, there are still servers being used during leveraging Docker but they are abstracted away from app development. 
  Example of some serverless services are **Kubernetes, AWS Lambda**, and **MS Azure functions**. 
  
  <br />
  
+ **The most benefit of using docker:**
+ 
+   -  Easy to migrate to different environments.
+   -  Create your container, complete your test, and remove container in a short period of time in comparison with Virtulization.
+   -  Better microservices, better isolation which will help us to achieve High Availability (HA).
+   -  Can be used docker in local machine after insatlling docker desktop. Therefore, you would be able to see containers on dashboard. 
+   -  Containers even can be removed from docker desktop dashboard itself or check images and more.
+ 
+ 
+ 
+ 
+ 
+ <br />
+  
  **CI/CD PIPELINE USING DOCKER**
  <br />
  Looking at the above image, we can visualize our pipeline while leveraging **Docker** and **Jenkins**. 
@@ -122,7 +138,7 @@ We have Tomcat application and we are **Dockerizing** it or **Containerizing** i
      
 **Note**: 
 
-      In order to remove containers
+      In order to remove containers:
 
       docker stop tomcat-container
       docker rm tomcat-container
@@ -131,16 +147,54 @@ We have Tomcat application and we are **Dockerizing** it or **Containerizing** i
       
       docker ps -a
       
-      To remove docker images
+      To remove docker images:
       
       docker rmi {image_id/image_name-tag}
       
-      To build custom image
+      To build custom image:
       
       docker build -t {name-of-image} .
       
+ <br />
+ 
+**DOCKER COMPOSE**      
+
+We'll use **docker compose** in order to **orchestrate** docker containers in lower environments.
       
-      
+Let's find a solution using **Docker-Compose**...
+
+   -  Create instance for docker compose on AWS Console ( For instance, Centos7 instance which is from Linux family).
+   -  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       
      
      
