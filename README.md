@@ -210,7 +210,31 @@ Let's find a solution using **Docker-Compose**...
    
             sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
   
-          
+   -  Make docker compose executable
+
+            sudo chmod +x /usr/local/bin/docker-compose
+            docker-compose
+            (You should get some output for installation of docker compose)
+            
+   -  In order to debug with docker compose
+
+            docker info
+            docker info | grep  -i root
+            
+<br />            
+            
+**Note:** 
+     
+**Docker Root Directory** ---> /var/lib/docker
+   
+   Whenever images are pulled and container is created it takes some memory from the disk space. Then all those are written to above directory. 
+   
+   -  To see how big is the memory under docker directory:
+      sudo du -sh /var/lib/docker
+      
+      
+            
+            
           
 
 
