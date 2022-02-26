@@ -88,7 +88,63 @@ Let's say, we would like to create **Tomcat** container.
 
 We have Tomcat application and we are **Dockerizing** it or **Containerizing** it.
 
+**To create Tomcat container**
 
+     docker run --name tomcat-container -p 8080:8080 tomcat-latest
+     Here, latest is our tag.
+     
+     This cmd will run docker on FOREGROUND MODE.
+     
+     In order to run this container all the time in background, we call it DETACH MODE. Do following...
+     
+     docker run -d --name tomcat-container -p 8080:8080 tomcat-latest
+     
+**To go to inside your container**
+
+     docker exec -it tomcat-container /bin/bash
+     
+     
+**List all files in docker continer and go to webapps directory
+
+     ls
+     cd webapps
+     (Nothing found)
+     cd ..
+     cd webapps..dist/
+     ls
+     (All files here)
+     (Copy everything here and paste in webapps directory)
+     cp -R ../webapps
+     
+**Paste your public ip for the machine and add port no 8080**
+
+     TOMCAT TEST APP should be on the screen.
+     
+**Note**: 
+
+      In order to remove containers
+
+      docker stop tomcat-container
+      docker rm tomcat-container
+      
+      To see exited containers:
+      
+      docker ps -a
+      
+      To remove docker images
+      
+      docker rmi {image_id/image_name-tag}
+      
+      To build custom image
+      
+      docker build -t {name-of-image} .
+      
+      
+      
+      
+     
+     
+     
      
      
 
