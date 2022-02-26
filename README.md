@@ -163,8 +163,15 @@ We'll use **docker compose** in order to **orchestrate** docker containers in lo
       
 Let's find a solution using **Docker-Compose**...
 
-   -  Create instance for docker compose on AWS Console ( For instance, Centos7 instance which is from Linux family).
-   -  
+   -  Create instance for docker compose on AWS Console ( For instance, centos7 instance which is from Linux family).
+   -  ssh to your centos7 instance.
+   -  Install docker on your centos7 instance (Each machine has its own pre-requisites)
+       
+          sudo yum install -y yum-utils
+          sudo yum-config-manager     --add-repo     
+          sudo yum install -y docker-ce
+          sudo systemctl start docker
+          sudo systemctl enable docker
 
 
 
