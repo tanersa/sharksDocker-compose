@@ -159,7 +159,9 @@ We have Tomcat application and we are **Dockerizing** it or **Containerizing** i
  
 **DOCKER COMPOSE**      
 
-We'll use **docker compose** in order to **orchestrate** docker containers in lower environments.
+We'll use **docker compose** in order to **orchestrate** docker containers in lower environments. 
+
+Use yaml file to configure your applications' services. You would be able to create and start all services with a single command from your configuration file.
       
 Let's find a solution using **Docker-Compose**...
 
@@ -172,6 +174,41 @@ Let's find a solution using **Docker-Compose**...
           sudo yum install -y docker-ce
           sudo systemctl start docker
           sudo systemctl enable docker
+          sudo systemctl status docker
+         
+   -  Check the users if there is centos user  
+       
+          cat /etc/passwd
+          (No centos user)
+          
+   -  Check the docker if exists
+
+           cat /etc/group
+           (docker group exists)
+           
+   -  Check if centos is part of docker group
+
+            id centos
+            (centos is not part of docker group)
+            
+   -  To add centos user to docker group
+       
+            usermod -aG docker centos
+            id centos
+            (centos is in docker group now)
+            
+            
+   -  To see containers
+
+            docker ps
+            exit
+            ssh to your instance ( ssh -i ~/Downloads/demo.pem centos@{public-ip-of-instance} )
+            doccker ps
+            
+            
+  
+          
+          
 
 
 
