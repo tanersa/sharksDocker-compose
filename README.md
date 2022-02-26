@@ -71,7 +71,26 @@ Docker containers are build from  **docker images**. It's same as **VMs** are cr
      
 **To pull docker image**
 
-Let's say, we would like to create **Tomcat** container
+Let's say, we would like to create **Tomcat** container. 
+   
+   -  Go to your Dockerhub account and search for Tomcat image. 
+   -  After finding Tomcat version that you would like to pull, copy the pull command on the page.
+   
+**To pull tomcat image**
+
+     docker pull tomcat
+     
+**To check docker images**
+
+     docker images
+     
+**What we do here?**
+
+We have Tomcat application and we are **Dockerizing** it or **Containerizing** it.
+
+
+     
+     
 
 
 
