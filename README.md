@@ -369,8 +369,57 @@ We decided to **containerize** everything because **containers are more secure t
                id_rsa
                id_rsa.pub
                
-               
+   -  Now, lets check folders we have:
+
+            cd jenkins-data
+                 centos7
+                 docker-compose.yml
+                 jenkins-home
+                 
+            cd centos7
             
+   -  Lets change the name of the keys for centos user so we can differentiate.
+
+            ssh-keygen -f remote-key
+            
+            pwd
+               centoss7
+               
+   -  Since we created ssh keys, we have to **copy** these keys to the container. Therefore, we add another line in Dockerfile.
+
+            COPY remote-key.pub /home/remote_user/.ssh/authorized_keys
+            
+**Note**: Make sure you copy only **.pub** file **not the private file**. Otherwise, it would create huge security risk.
+
+   -  Give absolute right to user **"remote_user"** to add to Dockerfile
+
+            RUN chown remote_user:remote_user -R /home/remote_user/.ssh && \
+            chmod 600 /home/remote_user/.ssh/authorized_keys
+            
+   -  Add and agent and execute the container.
+
+            RUN /usr/sbin/sshd-keygen
+            CMD /usr/sbin/sshd -D
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            
+            
+            
+
+
             
             
             
