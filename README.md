@@ -480,6 +480,113 @@ Container itself is **ephemeral**. Eventhough we persist the data in VM this is 
 Lets say, there are 2 VMs and there is one Elastic Block Storage (**EBS**) on one of 2 VMs. If VM with EBS goes down, you would loose the data.
 Therefore, we still need to persist our data.
 
+**Solution....**
+
+We can use S3 bucket, because...
+
+   -  S3 bucket iis faster
+   -  Enable Versioning
+   -  S3 Bucket Policy
+   -  Cross Regional Replication
+   -  Has almost 5TB of Storage
+   
+Lets add more lines for MYSQL DB in **docker-compose.yml** file
+
+               db_host:
+                 container_name: db
+                 image: mysql:5.7
+                 environment:
+                   - "MYSQL_ROOT_PASSWORD=1234"
+                 volumes:
+                   - "$PWD/db_data:/var/lib/mysql"
+                 networks:
+                   - net
+             networks:
+               net:  
+
+   -  Make sure you are in correct directory where your docker-compose.yml file exists.
+
+               /home/centos/jenkins_data
+                   centos7
+                   docker-compose.yml
+                   jenkins_home
+                   
+   -  Run your docker-compose.yml file
+
+               docker-compose up -d
+               
+**Note:** We do not build image first before run because we pull image from docker hub. 
+
+   -  Now, we are pulling mysql image from docker hub
+
+               Creating DB ...
+               
+   -  Go inside db container
+
+               docker exec -it db bash 
+               
+   -  Do go inside database using password
+
+               mysql -u root -p
+               
+               Enter pwd:
+               
+               Then, you are inside DB.
+               
+Now we have **remote_host(VM)** and we have **Jenkins(VM)**.
+
+Everything, we will run on remote_host and will write **data inside DB(VM).**
+
+**Jenkins** will do orchestration for **CI/CD.**
+
+   -  Go inside remote_host container
+
+                docker exec -it remote-host bash
+                
+Our goal is to write the data into **MySQL DB** and backup the data in **AWS.**
+
+In order to do that we need clients:
+
+   -  AWS CLI
+   -  MySQL API
+
+   -  Now, we do run docker-compose file
+   
+                  docker-compose build
+                  docker-compose up -d
+                  
+                  docker-compose build: Because we are using Dockerfile here, we create our own image and not
+                  pulling from Docker Hub.
+                  
+                  
+ Now, we have 2 APIs configured.
+ 
+ Let's go to MySQL DB.
+ 
+ We are going to connect from remote_host to MySQL DB.
+ 
+    -  docker exec -it remote_host bash
+    -  mysql -u root -h db_host -p1234
+    
+So now...
+
+   -  We are connected to DB from remote_host
+   -  We are also connected to DB inside DB container
+
+**And, now we can create databases and see data inside those databases.**
+
+    
+    
+ 
+
+
+
+
+               
+
+                
+
+                   
 
              
              
