@@ -396,12 +396,124 @@ We decided to **containerize** everything because **containers are more secure t
             RUN chown remote_user:remote_user -R /home/remote_user/.ssh && \
             chmod 600 /home/remote_user/.ssh/authorized_keys
             
-   -  Add and agent and execute the container.
+   -  Add an agent and execute the container.
 
             RUN /usr/sbin/sshd-keygen
             CMD /usr/sbin/sshd -D
 
+   - Check what is inside **jenkins_data** directory
 
+            ll
+              centos7
+              docker-compose.yml
+              jenkins-home
+              
+   -  Update owner of centos7 directory
+
+            sudo chown -R 1000:1000 centos7/
+            
+   -  Run docker-compose file
+
+            docker-compose up -d 
+            
+   -  We see that we dont have image, so we need to build docker compose
+
+            docker-compose build (Builds the docker image)
+            
+   -  Run docker-compose file again
+
+            docker-compose up -d
+            (Now, we can see remote_host image coming up)
+            
+   -  Accces into container
+
+            docker exec -it jenkins bash
+            (we are inside jenkins)
+            
+**Note:** We run all jenkins jobs as jenkins user.  
+
+
+   -  We should be able to **shh from jenkins to remote host**
+
+            ssh remote_user@remote_host
+            
+   -  Copy files between container and to another container
+
+            docker cp remote-key jenkins:/tmp/remote-key
+            
+   -  We can go from one container to another container.
+
+            ssh -i /tmp/remote-key remote_user@remote_host
+            
+            
+   -  Go to Jenkins Dashboard and search for ssh plugin.
+
+            Manage Jenkins > Manage Plugins > Available
+            
+   -  Then go to Jenkins >  Global Credentials > Add Credentials > SSH username and private key
+
+            Copy the key from /tmp/remote-key directory in jenkins machine 
+            and paste for private key on Jenkins Dashboard.
+            
+   -  Go to SSH Sites and add credentials for remote_user.
+
+   -  Check Connection
+
+            Successfull!
+        
+   -  Run First JOB in container!
+
+            BUILD 
+                 Execute shell script on remote host using ssh
+            COMMAND
+                 NAME=Sharks
+                 echo "Hello $Name.Current date and time is $(date)" > /tmp/remote-file
+             
+   -  SAVE and BUILD NOW Jenkins Job.
+
+             SUCCESS !!!
+             
+**LET'S DOCKERIZE MYSQL DB NOW**    
+
+Container itself is **ephemeral**. Eventhough we persist the data in VM this is still not ideal. 
+
+Lets say, there are 2 VMs and there is one Elastic Block Storage (**EBS**) on one of 2 VMs. If VM with EBS goes down, you would loose the data.
+Therefore, we still need to persist our data.
+
+
+             
+             
+            
+
+
+           
+ 
+        
+        
+            
+            
+            
+            
+            
+            
+
+          
+            
+            
+            
+            
+            
+            
+      
+
+          
+            
+            
+            
+            
+
+                         
+            
 
 
 
