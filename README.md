@@ -296,10 +296,91 @@ Let's find a solution using **Docker-Compose**...
    
    -  **SAVE** docker-compose yaml file under **/home/centos/jenkins-data** directory
 
-  
-             
+   -  To run docker compose 
 
+            foreground mode:  docker-compose up
+            detach mode:      docker-compose up -d
+             
+   -  Copy public ip of the **docker-compose machine** and paste it to your browser then add port 8080, you should be able to see **Jenkins**
+      on your browser.
+      
+   -  Take the initial pwd from the given directory on Jeknins GUI and create your credentials.
+   -  To check jenkins container on your machine:
+  
+            docket container ls
+
+   -  To check images on your machine:
+
+            docker images
+            
+   -  If you need to stop jenkins, run:
+
+            docker-compose down
+            
+   -  After logging into Jenkins Dashboard, install suggested plugins.
+
+<br />
+
+**Let's dockerize centos machine now**
+
+   I am in **jenkins-data** directory. Now, lets create one more directory:
    
+            mkdir centos7
+            cd centos7
+            
+<br />            
+            
+**OUR TASK:** 
+
+Let's imagine, we have 100s of **VMs** for our task. They are too haeavy, and expensive. Additionally, its hard to deploy, migrate as well as hard to switch the environment. 
+
+We decided to **containerize** everything because **containers are more secure than VMs**. There are more layers involved in VMs, so you have to deal with more security. Since containers have less layers, you deal with less security. 
+
+   -  Create a **Dockerfile** under centos7 directory.
+
+            FROM centos:7
+            
+            RUN yum -y install mysql
+
+            RUN yum -y install python3 \
+                  python3-pip  \
+                  python3-setuptools \
+                && pip3 install --upgrade awscli
+
+            RUN yum -y install openssh-server
+
+            RUN useradd remote_user && \
+                echo "remote_user:1234" | passwd remote_user --stdin && \
+                mkdir /home/remote_user/.ssh && \
+                chmod 700 /home/remote_user/.ssh
+
+   -  We want to write everything in .ssh folder:
+
+            cd .ssh
+            (Current dir. /home/centos/.ssh)
+            
+   -  If we create our **keys**, we'll be in **.ssh folder**.
+
+   -  To create keys run below:
+
+            ssh-keygen
+            
+            Two files are created:
+               id_rsa
+               id_rsa.pub
+               
+               
+            
+            
+            
+            
+
+
+
+
+            
+            
+            
             
             
             
