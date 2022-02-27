@@ -288,7 +288,16 @@ Let's find a solution using **Docker-Compose**...
                   context: centos7
                 networks:
                   - net
-                  
+
+
+   -   As the line below **"volumes"** suggests, we copy the data **from container** to **VM directory** (local).
+
+               "$PWD/jenkins_home:/var/jenkins_home"
+   
+   -  **SAVE** docker-compose yaml file under **/home/centos/jenkins-data** directory
+
+  
+             
 
    
             
