@@ -229,9 +229,73 @@ Let's find a solution using **Docker-Compose**...
    
    Whenever images are pulled and container is created it takes some memory from the disk space. Then all those are written to above directory. 
    
-   -  To see how big is the memory under docker directory:
+   -  To see how big is the disk usage under docker directory:
   
             sudo du -sh /var/lib/docker
+            
+   -  To see max size of the storage
+   
+            df -h
+            
+**Note:** 
+    Let's say we have 2.3 GB and 99% of that memory is already used. Then, we have to create **voume** and **mount** this volume to your file system.
+    That would increase your memory.
+    
+   -  Let's pull jenkins image from docker hub now.
+
+            docker pull jenkins/jenkins:lts
+            
+            This image will also take some space from the memory under /var/lib/docker directory.
+            
+   -  You might need to create a new directory for data. That would be named as jenkins-data. 
+   
+            /home/centos/
+            cd jenkins-data
+            
+            Then we are in jenkins-data folder
+            
+   -  Create one more directory under **jenkins-data** called **jenkins-home**
+
+             mkdir jenkins-home
+
+**Note:** 
+    
+ The reason why we created this **jenkins-home** directory. Whenever we run jenkins jobs, it will genrate some sort of data. 
+ By default, container itself is **ephemeral** (stateless). We would create, delete and recreate but it is **not persistent voume**.
+ Therefore, we can store those jobs generated data somewhere. Basically, under a new directory we may create. 
+ 
+   -  Consequently, we need to give centos user absolute right for jenkins-home directory.
+    
+            sudo chown 1000:1000 -R jenkins-data/jenkins-home
+          
+   -  Now, let's create our docker-compose yaml file to configure services.
+
+            version: '3'
+            services:
+              jenkins:
+                container_name: jenkins
+                image: jenkins/jenkins:lts
+                ports:
+                  - "8080:8080"
+                volumes:
+                  - "$PWD/jenkins_home:/var/jenkins_home"
+                networks:
+                  - net
+              remote_host:
+                container_name: remote-host
+                image: remote-host
+                build: 
+                  context: centos7
+                networks:
+                  - net
+                  
+
+   
+            
+            
+            
+            
+            
             
             
       
