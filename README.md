@@ -474,21 +474,6 @@ We decided to **containerize** everything because **containers are more secure t
              SUCCESS !!!
              
 **LET'S DOCKERIZE MYSQL DB NOW**    
-
-Container itself is **ephemeral**. Eventhough we persist the data in VM this is still not ideal. 
-
-Lets say, there are 2 VMs and there is one Elastic Block Storage (**EBS**) on one of 2 VMs. If VM with EBS goes down, you would loose the data.
-Therefore, we still need to persist our data.
-
-**Solution....**
-
-We can use S3 bucket, because...
-
-   -  S3 bucket iis faster
-   -  Enable Versioning
-   -  S3 Bucket Policy
-   -  Cross Regional Replication
-   -  Has almost 5TB of Storage
    
 Lets add more lines for MYSQL DB in **docker-compose.yml** file
 
@@ -574,6 +559,27 @@ So now...
    -  We are also connected to DB inside DB container
 
 **And, now we can create databases and see data inside those databases.**
+
+<br />
+
+**Further solution...**
+
+Container itself is **ephemeral**. Eventhough we persist the data in VM this is still not ideal. 
+
+Lets say, there are 2 VMs and there is one Elastic Block Storage (**EBS**) on one of 2 VMs. If VM with EBS goes down, you would loose the data.
+Therefore, we still need to persist our data.
+
+**Solution....**
+
+We can use S3 bucket, because...
+
+   -  S3 bucket iis faster
+   -  Enable Versioning
+   -  S3 Bucket Policy
+   -  Cross Regional Replication
+   -  Has almost 5TB of Storage
+
+**Note:** We'll use S3 Bucket in a different project not here.
 
     
     
