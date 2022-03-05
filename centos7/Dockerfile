@@ -1,6 +1,5 @@
 FROM centos:7
 
-
 RUN yum -y install mysql
 
 RUN yum -y install python3 \
