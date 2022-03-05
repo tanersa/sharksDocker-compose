@@ -21,10 +21,6 @@
    -  Can be used docker in local machine after insatlling docker desktop. Therefore, you would be able to see containers on dashboard. 
    -  Containers even can be removed from docker desktop dashboard itself or check images and more.
  
- 
- 
- 
- 
  <br />
   
  **CI/CD PIPELINE USING DOCKER**
